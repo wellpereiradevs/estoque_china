@@ -12,6 +12,12 @@ public class Main {
 
         //Loop para cadastrar os produtos
         for (int i=0; i < products.length; i++) {
+            //Mensagem de Limite Máximo do cadastro de produtos
+            if (i == 49) {
+                System.out.println("Limite máximo de 50 produtos atingidos");
+                break;
+            }
+            //Cadastrando os Produtos
             System.out.println("Cadastro do Produto #" + (i + 1));
 
             System.out.print("Insira o código do produto: ");
@@ -23,10 +29,10 @@ public class Main {
             System.out.print("Digite o nome do produto: ");
             String name = scanner.nextLine();
 
-            System.out.print("Insira o preço de compra:");
+            System.out.print("Insira o preço de compra:R$");
             double price_purchase = scanner.nextDouble();
 
-            System.out.print("Insira o preço de venda:");
+            System.out.print("Insira o preço de venda:R$");
             double price_sale = scanner.nextDouble();
 
             System.out.print("Digite o estoque mínimo: ");
@@ -43,5 +49,6 @@ public class Main {
             //Limpar o buffer
             scanner.nextLine();
         }
+        scanner.close();
     }
 }

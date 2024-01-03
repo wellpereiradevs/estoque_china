@@ -2,6 +2,7 @@ package products;
 
 public class Products {
 
+    //Atributos da classe de Produtos
     private int code;
     private String name;
     private double price_purchase;
@@ -9,6 +10,7 @@ public class Products {
     private int minimum_stock;
     private int stock_quant;
 
+    //Método Construtor da classe de Produtos
     public Products(int code, String name, double price_purchase, double price_sale, int minimum_stock, int stock_quant) {
         this.code = code;
         this.name = name;
@@ -18,6 +20,7 @@ public class Products {
         this.stock_quant = stock_quant;
     }
 
+    //Método Getters e Setters da classe de Produtos
     public int getCode() {
         return code;
     }

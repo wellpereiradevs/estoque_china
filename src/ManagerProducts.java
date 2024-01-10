@@ -22,11 +22,12 @@ public class ManagerProducts {
                     System.out.println("Boa escolha. Vamos iniciar!");
                     registerProduct();
                     break;
-                /*case 2:
+                case 2:
+                    System.out.println();
+                    System.out.println("Ótimo, vamos listar os produtos.");
                     listProduct();
-                    clearScreen();
                     break;
-                case 3:
+                /*case 3:
                     searchByCode();
                     clearScreen();
                     break;
@@ -57,6 +58,7 @@ public class ManagerProducts {
         } while (option != 9);
     }
 
+    /* Exibir o menu na tela */
     private static void displayMenu() {
         System.out.println("MENU DE OPÇÕES");
         System.out.println("1.Cadastrar produto");
@@ -87,7 +89,7 @@ public class ManagerProducts {
             System.out.println("Digite um número válido");
         }
 
-        //
+        //Cadastro de acordo com a quantidade desejada
         for (int i = 0; i < quantityProducts; i++) {
             System.out.println("Cadastro do Produto #" + (i + 1));
 
@@ -120,17 +122,41 @@ public class ManagerProducts {
             //Limpar o buffer
             scanner.nextLine();
 
-        //Mensagem de Limite Máximo do cadastro de produtos
-        if (i + 1 == quantityProducts) {
-            System.out.println("Seu cadastro com " + quantityProducts + " produtos foram realizados.");
-            break;
-        } else if (i + 1 == 50) {
-            System.out.println("Limite máximo de 50 produtos atingidos!");
+            //Mensagem de Limite Máximo do cadastro de produtos
+            if (i + 1 == quantityProducts) {
+                System.out.println("Seu cadastro com " + quantityProducts + " produtos foram realizados.");
+                break;
+            } else if (i + 1 == 50) {
+                System.out.println("Limite máximo de 50 produtos atingidos!");
+            }
+        }
+        System.out.println("Agora, voltaremos ao menu !");
+        System.out.println();
+    }
+
+    /* SEGUNDO MÉTODO: LISTAR PRODUTO */
+    private static void listProduct() {
+        boolean productsRegistered = false;
+        System.out.println();
+        System.out.println("LISTA DOS PRODUTOS CADASTRADOS");
+        for (Products product : products) {
+            if (product != null) {
+                System.out.println("Código: " + product.getCode() +
+                        ", Nome: " + product.getName() +
+                        ", Preço de compra: " + product.getPrice_purchase() +
+                        ", Preço de venda: " + product.getPrice_sale() +
+                        ", Estoque mínimo: " + product.getMinimum_stock() +
+                        ", Quantidade em estoque: " + product.getStock_quant());
+                System.out.println();
+                productsRegistered = true;
+                System.out.println();
+            }
+        }
+        if (!productsRegistered) {
+            System.out.println("Nenhum produto cadastrado. Por favor, primeiro realize o cadastro!");
+            System.out.println();
         }
     }
-            System.out.println("Agora, voltaremos ao menu !");
-            System.out.println();
-   }
 }
 
 

@@ -1,22 +1,38 @@
+/*
 import products.Products;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         //Array para guardar os produtos
-        Products[] products = new Products[50];
+        Products[] products = new Products[51];
+
+        //Inicialização de todas as posições com null
+        for (int i = 0; i < products.length; i++) {
+            products[i] = null;
+        }
 
         //Scanner de entrada do usuário
         Scanner scanner = new Scanner(System.in);
 
         //Loop para cadastrar os produtos
         for (int i=0; i < products.length; i++) {
+            //Null para posições vazias
+            if (products[i] == null) {
+                System.out.println("Posição de #" + (i + 1) + " está vazia. Preencha esta posição.");
+            } else {
+                // Lógica para imprimir o produto se a posição não estiver vazia
+                System.out.println("Posição de #" + (i + 1) + ": " + products[i]);
+            }
+
             //Mensagem de Limite Máximo do cadastro de produtos
-            if (i == 49) {
+            if (i == 50) {
                 System.out.println("Limite máximo de 50 produtos atingidos");
                 break;
             }
+
             //Cadastrando os Produtos
             System.out.println("Cadastro do Produto #" + (i + 1));
 
@@ -49,6 +65,13 @@ public class Main {
             //Limpar o buffer
             scanner.nextLine();
         }
+            //Mostrar os produtos cadastrados
+            for (Products product : products) {
+                if (product != null) {
+                    System.out.println(product);
+                }
+            }
         scanner.close();
     }
 }
+*/

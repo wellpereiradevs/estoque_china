@@ -27,11 +27,10 @@ public class ManagerProducts {
                     System.out.println("Ótimo, vamos listar os produtos.");
                     listProduct();
                     break;
-                /*case 3:
+                case 3:
                     searchByCode();
-                    clearScreen();
                     break;
-                case 4:
+                /*case 4:
                     searchByName();
                     clearScreen();
                     break;
@@ -49,7 +48,7 @@ public class ManagerProducts {
                     productsWithMarginProfitOver50();
                     break;*/
                 case 9:
-                    System.out.println("Saindo do programa. Até logo!");
+                    System.out.println("Programa finalizado. Até logo!");
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
@@ -79,59 +78,57 @@ public class ManagerProducts {
         System.out.println();
         System.out.println("HORA DE CADASTRAR O SEU PRODUTO");
         System.out.println();
-        System.out.print("Quantos produtos serão cadastrados? ");
-        int quantityProducts = scanner.nextInt();
-        scanner.nextLine();
 
-        System.out.println();
-
-        for (int i = 0; i > quantityProducts; i++) {
-            System.out.println("Digite um número válido");
-        }
-
-        //Cadastro de acordo com a quantidade desejada
-        for (int i = 0; i < quantityProducts; i++) {
-            System.out.println("Cadastro do Produto #" + (i + 1));
-
-            System.out.print("Insira o código do produto: ");
-            int code = scanner.nextInt();
-
-            //Consumir a nova linha
+            //Cadastro de Produtos
+            System.out.print("Quantos produtos serão cadastrados? ");
+            int quantityProducts = scanner.nextInt();
             scanner.nextLine();
 
-            System.out.print("Digite o nome do produto: ");
-            String name = scanner.nextLine();
-
-            System.out.print("Insira o preço de compra:R$");
-            double price_purchase = scanner.nextDouble();
-
-            System.out.print("Insira o preço de venda:R$");
-            double price_sale = scanner.nextDouble();
-
-            System.out.print("Digite o estoque mínimo: ");
-            int minimum_stock = scanner.nextInt();
-
-            System.out.print("Digite a quantidade em estoque: ");
-            int stock_quant = scanner.nextInt();
-
-            //Criar objeto Produto e adicioná-lo ao array
-            products[i] = new Products(code, name, price_purchase, price_sale, minimum_stock, stock_quant);
-            //Quebra de linha ao cadastrar um novo produto
             System.out.println();
 
-            //Limpar o buffer
-            scanner.nextLine();
+            //Cadastro de acordo com a quantidade desejada
+            for (int i = 0; i < quantityProducts; i++) {
+                System.out.println("Cadastro do Produto #" + (i + 1));
 
-            //Mensagem de Limite Máximo do cadastro de produtos
-            if (i + 1 == quantityProducts) {
-                System.out.println("Seu cadastro com " + quantityProducts + " produtos foram realizados.");
-                break;
-            } else if (i + 1 == 50) {
-                System.out.println("Limite máximo de 50 produtos atingidos!");
+                System.out.print("Insira o código do produto: ");
+                int code = scanner.nextInt();
+
+                //Consumir a nova linha
+                scanner.nextLine();
+
+                System.out.print("Digite o nome do produto: ");
+                String name = scanner.nextLine();
+
+                System.out.print("Insira o preço de compra:R$");
+                double price_purchase = scanner.nextDouble();
+
+                System.out.print("Insira o preço de venda:R$");
+                double price_sale = scanner.nextDouble();
+
+                System.out.print("Digite o estoque mínimo: ");
+                int minimum_stock = scanner.nextInt();
+
+                System.out.print("Digite a quantidade em estoque: ");
+                int stock_quant = scanner.nextInt();
+
+                //Criar objeto Produto e adicioná-lo ao array
+                products[i] = new Products(code, name, price_purchase, price_sale, minimum_stock, stock_quant);
+                //Quebra de linha ao cadastrar um novo produto
+                System.out.println();
+
+                //Limpar o buffer
+                scanner.nextLine();
+
+                //Mensagem de Limite Máximo do cadastro de produtos
+                if (i + 1 == quantityProducts) {
+                    System.out.println("Seu cadastro com " + quantityProducts + " produtos foram realizados.");
+                    break;
+                } else if (i + 1 == 50) {
+                    System.out.println("Limite máximo de 50 produtos atingidos!");
+                }
             }
-        }
-        System.out.println("Agora, voltaremos ao menu !");
-        System.out.println();
+            System.out.println("Agora, voltaremos ao menu !");
+            System.out.println();
     }
 
     /* SEGUNDO MÉTODO: LISTAR PRODUTO */
@@ -147,15 +144,53 @@ public class ManagerProducts {
                         ", Preço de venda: " + product.getPrice_sale() +
                         ", Estoque mínimo: " + product.getMinimum_stock() +
                         ", Quantidade em estoque: " + product.getStock_quant());
-                System.out.println();
                 productsRegistered = true;
-                System.out.println();
             }
         }
         if (!productsRegistered) {
             System.out.println("Nenhum produto cadastrado. Por favor, primeiro realize o cadastro!");
             System.out.println();
         }
+    }
+
+    /* TERCEIRO MÉTODO: PESQUISAR PRODUTO POR CÓDIGO */
+    private static void searchByCode() {
+        System.out.println();
+        System.out.println("PESQUISA DO PRODUTO POR CÓDIGO");
+
+        do {
+            System.out.println();
+            System.out.print("Para sair, digite 12.Para continuar, digite 10: ");
+            System.out.println();
+            int number = scanner.nextInt();
+
+            if (number == 12) {
+                System.out.println("Você saiu. Até breve!");
+                System.out.println();
+                return;
+            } else if (number == 10) {
+                System.out.print("Digite o código: ");
+                int code = scanner.nextInt();
+
+                boolean productsRegistered = false;
+
+                for (Products product : products) {
+                    if (product != null && code == product.getCode()) {
+                        System.out.println("Encontramos o produto com o código informado.");
+                        System.out.println("Código: " + product.getCode() +
+                                ", Nome: " + product.getName() +
+                                ", Preço de compra: " + product.getPrice_purchase() +
+                                ", Preço de venda: " + product.getPrice_sale() +
+                                ", Estoque mínimo: " + product.getMinimum_stock() +
+                                ", Quantidade em estoque: " + product.getStock_quant());
+                        productsRegistered = true;
+                    }
+                }
+                if (!productsRegistered) {
+                    System.out.println("Produto não encontrado. Tente novamente.");
+                }
+            }
+        } while (true);
     }
 }
 

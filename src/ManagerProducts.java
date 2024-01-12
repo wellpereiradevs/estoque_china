@@ -30,11 +30,10 @@ public class ManagerProducts {
                 case 3:
                     searchByCode();
                     break;
-                /*case 4:
+                case 4:
                     searchByName();
-                    clearScreen();
                     break;
-                case 5:
+                /*case 5:
                     deleteProduct();
                     clearScreen();
                     break;
@@ -133,9 +132,11 @@ public class ManagerProducts {
 
     /* SEGUNDO MÉTODO: LISTAR PRODUTO */
     private static void listProduct() {
-        boolean productsRegistered = false;
         System.out.println();
         System.out.println("LISTA DOS PRODUTOS CADASTRADOS");
+
+        boolean productsRegistered = false;
+
         for (Products product : products) {
             if (product != null) {
                 System.out.println("Código: " + product.getCode() +
@@ -145,6 +146,7 @@ public class ManagerProducts {
                         ", Estoque mínimo: " + product.getMinimum_stock() +
                         ", Quantidade em estoque: " + product.getStock_quant());
                 productsRegistered = true;
+                System.out.println();
             }
         }
         if (!productsRegistered) {
@@ -159,17 +161,17 @@ public class ManagerProducts {
         System.out.println("PESQUISA DO PRODUTO POR CÓDIGO");
 
         do {
-            System.out.println();
-            System.out.print("Para sair, digite 12.Para continuar, digite 10: ");
+            System.out.print("Para sair, digite 12.Para continuar, digite 10:  ");
             System.out.println();
             int number = scanner.nextInt();
 
             if (number == 12) {
                 System.out.println("Você saiu. Até breve!");
+                System.out.println("Para continuar, escolha uma opção no menu!");
                 System.out.println();
                 return;
             } else if (number == 10) {
-                System.out.print("Digite o código: ");
+                System.out.print("Digite o código do produto: ");
                 int code = scanner.nextInt();
 
                 boolean productsRegistered = false;
@@ -186,8 +188,52 @@ public class ManagerProducts {
                         productsRegistered = true;
                     }
                 }
+                System.out.println();
                 if (!productsRegistered) {
-                    System.out.println("Produto não encontrado. Tente novamente.");
+                    System.out.println("Produto não encontrado com o código informado. Tente novamente.");
+                    System.out.println();
+                }
+            }
+        } while (true);
+    }
+
+    /* QUARTO MÉTODO: PESQUISAR PRODUTO POR NOME */
+    private static void searchByName() {
+        System.out.println();
+        System.out.println("PESQUISA DO PRODUTO POR NOME");
+
+        do {
+            System.out.println("Para sair, digite 12.Para continuar, digite 10: ");
+            int number = scanner.nextInt();
+
+            if (number == 12) {
+                System.out.println("Você saiu. Até breve.");
+                System.out.println("Para continuar, escolha uma opção no menu!");
+                System.out.println();
+                return;
+            } else if (number == 10) {
+                System.out.print("Digite o nome do produto: ");
+                scanner.nextLine();
+                String name = scanner.nextLine();
+
+                boolean productsRegistered = false;
+
+                for (Products product : products) {
+                    if (product != null && name.equals(product.getName())) {
+                        System.out.println("Encontramos o produto com o nome informado.");
+                        System.out.println("Nome: " + product.getName() +
+                                ", Código: " + product.getCode() +
+                                ", Preço de compra: " + product.getPrice_purchase() +
+                                ", Preço de venda: " + product.getPrice_sale() +
+                                ", Estoque mínimo: " + product.getMinimum_stock() +
+                                ", Quantidade em estoque: " + product.getStock_quant());
+                        productsRegistered = true;
+                    }
+                }
+                System.out.println();
+                if (!productsRegistered) {
+                    System.out.println("Produto não encontrado com este nome. Tente novamente.");
+                    System.out.println();
                 }
             }
         } while (true);

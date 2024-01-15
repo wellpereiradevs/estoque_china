@@ -71,63 +71,73 @@ public class ManagerProducts {
 
     /* PRIMEIRO MÉTODO: CADASTRAR PRODUTO */
     private static void registerProduct() {
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println();
         System.out.println("HORA DE CADASTRAR O SEU PRODUTO");
         System.out.println();
 
-            //Cadastro de Produtos
-            System.out.print("Quantos produtos serão cadastrados? ");
-            int quantityProducts = scanner.nextInt();
+        int productsCount = 0;
+
+        // Verificar se o limite máximo de produtos foi atingido
+        if (productsCount >= products.length || productsCount >= 50) {
+            System.out.println("Limite máximo de 50 produtos atingido. Não é possível cadastrar mais produtos.");
+            return;
+        }
+
+        // Cadastrar produtos
+        for (int i = productsCount; i < products.length; i++) {
+            System.out.println("Cadastro do Produto #" + (i + 1));
+
+            System.out.print("Insira o código do produto: ");
+            int code = scanner.nextInt();
             scanner.nextLine();
 
+            System.out.print("Digite o nome do produto: ");
+            String name = scanner.nextLine();
+
+            System.out.print("Insira o preço de compra: R$");
+            double pricePurchase = scanner.nextDouble();
+
+            System.out.print("Insira o preço de venda: R$");
+            double priceSale = scanner.nextDouble();
+
+            System.out.print("Digite o estoque mínimo: ");
+            int minimumStock = scanner.nextInt();
+
+            //Quantidade inicial será zero.
+            int stockQuant = 0;
+
+            //Criar objeto Produto e adicioná-lo ao array.
+            Products newProduct = new Products(code, name, pricePurchase, priceSale, minimumStock, stockQuant);
+            products[i] = newProduct;
+
+            //Aumentar a contagem dos produtos.
+            productsCount++;
+
+            // Quebra de linha ao cadastrar um novo produto.
             System.out.println();
 
-            //Cadastro de acordo com a quantidade desejada
-            for (int i = 0; i < quantityProducts; i++) {
-                System.out.println("Cadastro do Produto #" + (i + 1));
+            //Limpar o buffer.
+            scanner.nextLine();
 
-                System.out.print("Insira o código do produto: ");
-                int code = scanner.nextInt();
-
-                //Consumir a nova linha
-                scanner.nextLine();
-
-                System.out.print("Digite o nome do produto: ");
-                String name = scanner.nextLine();
-
-                System.out.print("Insira o preço de compra:R$");
-                double price_purchase = scanner.nextDouble();
-
-                System.out.print("Insira o preço de venda:R$");
-                double price_sale = scanner.nextDouble();
-
-                System.out.print("Digite o estoque mínimo: ");
-                int minimum_stock = scanner.nextInt();
-
-                System.out.print("Digite a quantidade em estoque: ");
-                int stock_quant = scanner.nextInt();
-
-                //Criar objeto Produto e adicioná-lo ao array.
-                products[i] = new Products(code, name, price_purchase, price_sale, minimum_stock, stock_quant);
-                //Quebra de linha ao cadastrar um novo produto.
-                System.out.println();
-
-                //Limpar o buffer.
-                scanner.nextLine();
-
-                //Mensagem de Limite Máximo do cadastro de produtos.
-                if (i + 1 == quantityProducts) {
-                    System.out.println("Seu cadastro com " + quantityProducts + " produtos foram realizados.");
-                    break;
-                } else if (i + 1 == 50) {
-                    System.out.println("Limite máximo de 50 produtos atingidos!");
-                }
+            //Conferir se atingiu o limite máximo de produtos.
+            if (productsCount >= 50) {
+                System.out.println("Limite máximo de 50 produtos atingido!");
+                break;
             }
-            System.out.println("Agora, voltaremos ao menu !");
-            System.out.println();
+
+            //Perguntar ao o usuário se deseja cadastrar mais produtos.
+            System.out.print("Deseja cadastrar mais produtos? (S/N): ");
+            String answer = scanner.nextLine().toUpperCase();
+
+            if (!answer.equals("S")) {
+                System.out.println("Cadastro de produtos concluído.");
+                break;
+            }
+        }
+        System.out.println("Agora, voltaremos ao menu !");
+        System.out.println();
     }
+
 
     /* SEGUNDO MÉTODO: LISTAR PRODUTO */
     private static void listProduct() {

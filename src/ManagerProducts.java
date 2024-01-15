@@ -33,11 +33,10 @@ public class ManagerProducts {
                 case 4:
                     searchByName();
                     break;
-                /*case 5:
+                case 5:
                     deleteProduct();
-                    clearScreen();
                     break;
-                case 6:
+                /*case 6:
                     updateStock();
                     break;
                 case 7:
@@ -237,6 +236,51 @@ public class ManagerProducts {
                 }
             }
         } while (true);
+    }
+
+    /* QUINTO MÉTODO: EXCLUIR UM PRODUTO */
+    private static void deleteProduct() {
+        System.out.println();
+        System.out.println("EXCLUIR UM PRODUTO");
+
+        System.out.print("Digite o nome do produto: ");
+        scanner.nextLine();
+        String name = scanner.nextLine();
+
+        boolean productFound = false;
+
+        for (int i = 0; i < products.length; i++) {
+            Products product = products[i];
+            if (product != null && name.equals(product.getName())) {
+                System.out.println("Encontramos o produto com o nome informado.");
+                System.out.println("Nome: " + product.getName() +
+                        ", Código: " + product.getCode() +
+                        ", Preço de compra: " + product.getPrice_purchase() +
+                        ", Preço de venda: " + product.getPrice_sale() +
+                        ", Estoque mínimo: " + product.getMinimum_stock() +
+                        ", Quantidade em estoque: " + product.getStock_quant());
+
+                System.out.print("Deseja realmente excluir este produto? (s/n): ");
+                String confirmation = scanner.nextLine().toUpperCase();
+
+                if (confirmation.equals("s")) {
+                    //Caso o produto não seja excluído, será cancelado
+                    products[i] = null;
+                    System.out.println("Produto excluído com sucesso.");
+                } else {
+                    System.out.println("Exclusão cancelada.");
+                }
+
+                productFound = true;
+                break; //Não é necessário continuar procurando, após encontrar o produto
+            }
+        }
+
+        System.out.println();
+        if (!productFound) {
+            System.out.println("Produto não encontrado com este nome. Tente novamente.");
+            System.out.println();
+        }
     }
 }
 

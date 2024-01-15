@@ -36,10 +36,10 @@ public class ManagerProducts {
                 case 5:
                     deleteProduct();
                     break;
-                /*case 6:
+                case 6:
                     updateStock();
                     break;
-                case 7:
+                /*case 7:
                     stockMinimumProduct();
                     break;
                 case 8:
@@ -109,15 +109,15 @@ public class ManagerProducts {
                 System.out.print("Digite a quantidade em estoque: ");
                 int stock_quant = scanner.nextInt();
 
-                //Criar objeto Produto e adicioná-lo ao array
+                //Criar objeto Produto e adicioná-lo ao array.
                 products[i] = new Products(code, name, price_purchase, price_sale, minimum_stock, stock_quant);
-                //Quebra de linha ao cadastrar um novo produto
+                //Quebra de linha ao cadastrar um novo produto.
                 System.out.println();
 
-                //Limpar o buffer
+                //Limpar o buffer.
                 scanner.nextLine();
 
-                //Mensagem de Limite Máximo do cadastro de produtos
+                //Mensagem de Limite Máximo do cadastro de produtos.
                 if (i + 1 == quantityProducts) {
                     System.out.println("Seu cadastro com " + quantityProducts + " produtos foram realizados.");
                     break;
@@ -264,7 +264,7 @@ public class ManagerProducts {
                 String confirmation = scanner.nextLine().toUpperCase();
 
                 if (confirmation.equals("s")) {
-                    //Caso o produto não seja excluído, será cancelado
+                    //Caso o produto não seja excluído, será cancelado.
                     products[i] = null;
                     System.out.println("Produto excluído com sucesso.");
                 } else {
@@ -272,7 +272,7 @@ public class ManagerProducts {
                 }
 
                 productFound = true;
-                break; //Não é necessário continuar procurando, após encontrar o produto
+                break; //Não é necessário continuar procurando, após encontrar o produto.
             }
         }
 
@@ -281,7 +281,55 @@ public class ManagerProducts {
             System.out.println("Produto não encontrado com este nome. Tente novamente.");
             System.out.println();
         }
+
     }
+
+        /* SEXTO MÉTODO: ATUALIZAR ESTOQUE DO PRODUTO */
+        private static void updateStock() {
+            System.out.println();
+            System.out.println("ATUALIZAR ESTOQUE DE UM PRODUTO");
+
+            System.out.print("Digite o nome do produto: ");
+            scanner.nextLine();
+            String name = scanner.nextLine();
+
+            boolean productFound = false;
+
+            for (int i = 0; i < products.length; i++) {
+                Products product = products[i];
+                if (product != null && name.equals(product.getName())) {
+                    System.out.println("Encontramos o produto com o nome informado.");
+                    System.out.println("Nome: " + product.getName() +
+                            ", Código: " + product.getCode() +
+                            ", Preço de compra: " + product.getPrice_purchase() +
+                            ", Preço de venda: " + product.getPrice_sale() +
+                            ", Estoque mínimo: " + product.getMinimum_stock() +
+                            ", Quantidade em estoque: " + product.getStock_quant());
+
+                    System.out.print("Digite a quantidade a ser adicionada/subtraída ao estoque: ");
+                    int quantity = scanner.nextInt();
+                    scanner.nextLine(); //Limpar o buffer do scanner.
+
+                    //Atualizar o estoque.
+                    int newStock = product.getStock_quant() + quantity;
+                    if (newStock < 0) {
+                        System.out.println("A quantidade resultaria em um estoque negativo. Operação cancelada.");
+                    } else {
+                        product.setStock_quant(newStock);
+                        System.out.println("Estoque atualizado com sucesso. Novo estoque: " + newStock);
+                    }
+
+                    productFound = true;
+                    break; //Não é necessário continuar procurando, após encontrar o produto.
+                }
+            }
+
+            System.out.println();
+            if (!productFound) {
+                System.out.println("Produto não encontrado com este nome. Tente novamente.");
+                System.out.println();
+            }
+        }
 }
 
 

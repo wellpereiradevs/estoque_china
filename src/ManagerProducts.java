@@ -39,10 +39,10 @@ public class ManagerProducts {
                 case 6:
                     updateStock();
                     break;
-                /*case 7:
+                case 7:
                     stockMinimumProduct();
                     break;
-                case 8:
+                /*case 8:
                     productsWithMarginProfitOver50();
                     break;*/
                 case 9:
@@ -278,7 +278,7 @@ public class ManagerProducts {
 
         System.out.println();
         if (!productFound) {
-            System.out.println("Produto não encontrado com este nome. Tente novamente.");
+            System.out.println("Não encontramos o produto com este nome. Tente novamente.");
             System.out.println();
         }
 
@@ -326,9 +326,35 @@ public class ManagerProducts {
 
             System.out.println();
             if (!productFound) {
-                System.out.println("Produto não encontrado com este nome. Tente novamente.");
+                System.out.println("Não encontramos o produto com este nome. Tente novamente.");
                 System.out.println();
             }
+        }
+
+        /* SÉTIMO MÉTODO: PRODUTOS COM ESTOQUE MÍNIMO */
+        private static void stockMinimumProduct() {
+            System.out.println();
+            System.out.println("PRODUTOS EM ESTOQUE MÍNIMO");
+
+            boolean productsFound = false;
+
+            for (Products product : products) {
+                if (product != null && product.getMinimum_stock() < 50) {
+                    System.out.println("Nome: " + product.getName() +
+                            ", Código: " + product.getCode() +
+                            ", Preço de compra: " + product.getPrice_purchase() +
+                            ", Preço de venda: " + product.getPrice_sale() +
+                            ", Estoque mínimo: " + product.getMinimum_stock() +
+                            ", Quantidade em estoque: " + product.getStock_quant());
+
+                    productsFound = true;
+                }
+            }
+
+            if (!productsFound) {
+                System.out.println("Não há produtos com estoque mínimo abaixo de 50.");
+            }
+            System.out.println();
         }
 }
 

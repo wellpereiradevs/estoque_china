@@ -1,6 +1,5 @@
 import products.Products;
 
-
 import java.util.Scanner;
 
 public class ManagerProducts {
@@ -28,23 +27,35 @@ public class ManagerProducts {
                     listProduct();
                     break;
                 case 3:
+                    System.out.println();
+                    System.out.println("Entendi, vamos pesquisar por código");
                     searchByCode();
                     break;
                 case 4:
+                    System.out.println();
+                    System.out.println("Entendi, vamos pesquisar por nome");
                     searchByName();
                     break;
                 case 5:
+                    System.out.println();
+                    System.out.println("Certo, vamos excluir produtos");
                     deleteProduct();
                     break;
                 case 6:
+                    System.out.println();
+                    System.out.println("Ok, vamos atualizar o estoque");
                     updateStock();
                     break;
                 case 7:
+                    System.out.println();
+                    System.out.println("Entendi, mostraremos os produtos em estoque mínimo");
                     stockMinimumProduct();
                     break;
-                /*case 8:
+                case 8:
+                    System.out.println();
+                    System.out.println("Entendi, mostraremos os produtos com a margem de lucro alta");
                     productsWithMarginProfitOver50();
-                    break;*/
+                    break;
                 case 9:
                     System.out.println("Programa finalizado. Até logo!");
                     break;
@@ -366,6 +377,36 @@ public class ManagerProducts {
             }
             System.out.println();
         }
+
+    /* OITAVO MÉTODO: PRODUTOS COM MARGEM DE LUCRO ACIMA DE 50% */
+    private static void productsWithMarginProfitOver50() {
+        System.out.println();
+        System.out.println("PRODUTOS COM LUCRO ACIMA DE 50%");
+        System.out.println();
+
+        boolean productsFound = false;
+
+        for (Products product : products) {
+            if (product != null) {
+                double profitMargin = ((product.getPrice_sale() - product.getPrice_purchase()) / product.getPrice_purchase()) * 100;
+                if (profitMargin > 50) {
+                    System.out.println("Nome: " + product.getName() +
+                            ", Código: " + product.getCode() +
+                            ", Margem de Lucro: " + profitMargin + "%" +
+                            ", Preço de compra: R$" + product.getPrice_purchase() +
+                            ", Preço de venda: R$" + product.getPrice_sale() +
+                            ", Estoque mínimo: " + product.getMinimum_stock() +
+                            ", Quantidade em estoque: " + product.getStock_quant());
+                    productsFound = true;
+                }
+            }
+        }
+        if (!productsFound) {
+            System.out.println("Não há produtos com margem de lucro acima de 50%.");
+        }
+        System.out.println();
+    }
+
 }
 
 

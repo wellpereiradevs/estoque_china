@@ -68,4 +68,8 @@ public class Products {
     public void setStock_quant(int stock_quant) {
         this.stock_quant = stock_quant;
     }
+
+    public double calculateMarginProfit() {
+        return (price_sale - price_purchase) * 100 / 2;
+    }
 }
